@@ -1,0 +1,40 @@
+{% load static%}
+<!-- Header -->
+<header class="header-area">
+    <div class="container">
+        <div class="gx-row d-flex align-items-center justify-content-between">
+            <a href="/" class="logo">
+                <img src="{% static '/images/logo.svg '%}" alt="Logo">
+            </a>
+
+            <nav class="navbar">
+                <ul class="menu">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'works' %}">Works</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+
+                    {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
+                    <li><a href="{% url 'admin_index' %}">Admin Panel</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+
+                </ul>
+
+                <a href="{% url 'contact' %}" class="theme-btn">Let's talk</a>
+            </nav>
+
+            <a href="{% url 'contact' %}" class="theme-btn">Let's talk</a>
+
+            <div class="show-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+</header>
