@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'portfolio',
     'tinymce',
     'blog',
-    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -146,5 +145,5 @@ TINYMCE_DEFAULT_CONFIG = {
     "language": "es_ES",  # To force a specific language instead of the Django current language.
 }
 
-RECAPTCHA_PUBLIC_KEY = '6LdagyssAAAAABxQsq6x8VlyxzVZl_lFkJYiNxqU'
-RECAPTCHA_PRIVATE_KEY = '6LdagyssAAAAAPEu6fY6OBv6EKOS__jU4arIeG-_'
+RECAPTCHA_SITE_KEY = '6LfLpyssAAAAAN4-6aDQ3wws1jajGl9iD7kAFUQH'
+RECAPTCHA_SECRET_KEY = '6LfLpyssAAAAAB4oKNxPQTC-MelQpxgPyrbmTAzb'

@@ -6,8 +6,6 @@ from django.shortcuts import render, redirect
 from django.views.generic import *
 from django.views import View
 from reportlab.lib.pagesizes import A4
-
-from portfolio.models import *
 from portfolio.forms import *
 from django.urls import reverse_lazy
 from reportlab.pdfgen import canvas
@@ -60,7 +58,7 @@ class WorkDetailView(DetailView):
     template_name = 'work_detail.html'
     context_object_name = 'project'
 
-    def getqueryset(self):
+    def get_queryset(self):
         return Project.objects.prefetch_related('images').order_by('year')
 
     def get_object(self, queryset=None):
@@ -322,15 +320,33 @@ class YoutubeVideoDeleteView(DeleteView):
 
 def resume_download_view(request):
     if request.method == "POST":
-        form = ResumeDownloadForm(request.POST)
-        if form.is_valid():
-            pdf = generate_resume_pdf()
-            response = HttpResponse(pdf, content_type='application/pdf')
-            response['Content-Disposition'] = 'attachment; filename="resume.pdf"'
-            return response
-    else:
-        form = ResumeDownloadForm()
-    return render(request, "portfolio_resume_download.html", {"form": form})
+        recaptcha_response = request.POST.get('g-recaptcha-response')
+
+        data = {
+            'secret': settings.RECAPTCHA_SECRET_KEY,
+            'response': recaptcha_response
+        }
+
+        r = requests.post(
+            'https://www.google.com/recaptcha/api/siteverify',
+            data=data
+        )
+        result = r.json()
+
+        if not result.get('success'):
+            return render(request, 'portfolio_resume_download.html', {
+                'error': 'Captcha tasdiqlanmadi',
+                'RECAPTCHA_SITE_KEY': settings.RECAPTCHA_SITE_KEY
+            })
+
+        pdf_buffer = generate_resume_pdf()
+        response = HttpResponse(pdf_buffer, content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="Resume.pdf"'
+        return response
+
+    return render(request, 'portfolio_resume_download.html', {
+        'RECAPTCHA_SITE_KEY': settings.RECAPTCHA_SITE_KEY
+    })
 
 def generate_resume_pdf():
     buffer = BytesIO()
@@ -339,53 +355,40 @@ def generate_resume_pdf():
     y = height - 50
 
     about = AboutMe.objects.first()
+
     if about:
-        # Name
         p.setFont("Helvetica-Bold", 16)
         p.drawString(50, y, about.my_name)
-        y -= 25
+        y -= 30
 
-        # About Me
-        if about.about_me:
-            p.setFont("Helvetica", 12)
-            p.drawString(50, y, "About Me:")
-            y -= 20
-            text = p.beginText(50, y)
-            text.setFont("Helvetica", 12)
-            for line in about.about_me.splitlines():
-                text.textLine(line)
-                y -= 15
-            p.drawText(text)
-            y -= 20
+        p.setFont("Helvetica", 12)
+        text = p.beginText(50, y)
+        for line in about.about_me.splitlines():
+            text.textLine(line)
+        p.drawText(text)
+        y -= 80
 
-        # Skills
-        skills_list = ', '.join([s.name for s in about.skills.all()])
-        if skills_list:
-            p.drawString(50, y, f"Skills: {skills_list}")
+        skills = ", ".join([s.name for s in about.skills.all()])
+        if skills:
+            p.drawString(50, y, f"Skills: {skills}")
             y -= 30
 
-        # Education
-        educations = Education.objects.filter(about_me=about)
-        if educations.exists():
-            p.setFont("Helvetica-Bold", 14)
-            p.drawString(50, y, "Education:")
-            y -= 20
-            p.setFont("Helvetica", 12)
-            for edu in educations:
-                p.drawString(60, y, f"{edu.degree} - {edu.university} ({edu.start_year}-{edu.end_year})")
-                y -= 15
+        p.setFont("Helvetica-Bold", 14)
+        p.drawString(50, y, "Education")
+        y -= 20
+        p.setFont("Helvetica", 12)
+        for edu in Education.objects.filter(about_me=about):
+            p.drawString(60, y, f"{edu.degree} - {edu.university}")
+            y -= 15
 
-        # Experience
-        experiences = Experience.objects.filter(about_me=about)
-        if experiences.exists():
-            y -= 10
-            p.setFont("Helvetica-Bold", 14)
-            p.drawString(50, y, "Experience:")
-            y -= 20
-            p.setFont("Helvetica", 12)
-            for exp in experiences:
-                p.drawString(60, y, f"{exp.position} - {exp.company} ({exp.start_year}-{exp.end_year})")
-                y -= 15
+        y -= 20
+        p.setFont("Helvetica-Bold", 14)
+        p.drawString(50, y, "Experience")
+        y -= 20
+        p.setFont("Helvetica", 12)
+        for exp in Experience.objects.filter(about_me=about):
+            p.drawString(60, y, f"{exp.position} - {exp.company}")
+            y -= 15
 
     p.showPage()
     p.save()
