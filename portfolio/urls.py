@@ -8,6 +8,8 @@ urlpatterns = [
     path('works/',WorkView.as_view(),name='works'),
     path('work/<slug:slug>/',WorkDetailView.as_view(),name='work_detail'),
     path('contact/',ContactView.as_view(),name='contact'),
+    path('resume/download/', resume_download_view, name='resume_download'),
+
 
 # AboutMe
     path('aboutme/', AboutMeListView.as_view(), name='portfolio_aboutme_list_form'),

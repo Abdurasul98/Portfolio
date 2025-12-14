@@ -1,5 +1,12 @@
 from portfolio.models import AboutMe, Education, Experience, Skills, Project, ProjectImage, YoutubeVideo
 from django import forms
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
+
+class ResumeDownloadForm(forms.Form):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
+
+
 
 class AboutMeForm(forms.ModelForm):
     class Meta:

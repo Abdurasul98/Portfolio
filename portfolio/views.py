@@ -1,13 +1,21 @@
 import requests
 from django.contrib import messages
 from django.conf import settings
-from django.http import Http404
+from django.http import Http404, FileResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import *
 from django.views import View
+from reportlab.lib.pagesizes import A4
+
 from portfolio.models import *
 from portfolio.forms import *
 from django.urls import reverse_lazy
+from reportlab.pdfgen import canvas
+from io import BytesIO
+
+from portfolio.models import (
+    AboutMe, Education, Experience, Skills, Project
+)
 
 def index(request):
     return render(request, 'index.html')
@@ -307,3 +315,79 @@ class YoutubeVideoDeleteView(DeleteView):
     model = YoutubeVideo
     template_name = 'portfolio_youtubevideo_delete_form.html'
     success_url = reverse_lazy('admin_index')
+
+
+
+
+
+def resume_download_view(request):
+    if request.method == "POST":
+        form = ResumeDownloadForm(request.POST)
+        if form.is_valid():
+            pdf = generate_resume_pdf()
+            response = HttpResponse(pdf, content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="resume.pdf"'
+            return response
+    else:
+        form = ResumeDownloadForm()
+    return render(request, "portfolio_resume_download.html", {"form": form})
+
+def generate_resume_pdf():
+    buffer = BytesIO()
+    p = canvas.Canvas(buffer, pagesize=A4)
+    width, height = A4
+    y = height - 50
+
+    about = AboutMe.objects.first()
+    if about:
+        # Name
+        p.setFont("Helvetica-Bold", 16)
+        p.drawString(50, y, about.my_name)
+        y -= 25
+
+        # About Me
+        if about.about_me:
+            p.setFont("Helvetica", 12)
+            p.drawString(50, y, "About Me:")
+            y -= 20
+            text = p.beginText(50, y)
+            text.setFont("Helvetica", 12)
+            for line in about.about_me.splitlines():
+                text.textLine(line)
+                y -= 15
+            p.drawText(text)
+            y -= 20
+
+        # Skills
+        skills_list = ', '.join([s.name for s in about.skills.all()])
+        if skills_list:
+            p.drawString(50, y, f"Skills: {skills_list}")
+            y -= 30
+
+        # Education
+        educations = Education.objects.filter(about_me=about)
+        if educations.exists():
+            p.setFont("Helvetica-Bold", 14)
+            p.drawString(50, y, "Education:")
+            y -= 20
+            p.setFont("Helvetica", 12)
+            for edu in educations:
+                p.drawString(60, y, f"{edu.degree} - {edu.university} ({edu.start_year}-{edu.end_year})")
+                y -= 15
+
+        # Experience
+        experiences = Experience.objects.filter(about_me=about)
+        if experiences.exists():
+            y -= 10
+            p.setFont("Helvetica-Bold", 14)
+            p.drawString(50, y, "Experience:")
+            y -= 20
+            p.setFont("Helvetica", 12)
+            for exp in experiences:
+                p.drawString(60, y, f"{exp.position} - {exp.company} ({exp.start_year}-{exp.end_year})")
+                y -= 15
+
+    p.showPage()
+    p.save()
+    buffer.seek(0)
+    return buffer

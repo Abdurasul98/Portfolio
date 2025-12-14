@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'portfolio',
     'tinymce',
     'blog',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,6 @@ TINYMCE_DEFAULT_CONFIG = {
     "custom_undo_redo_levels": 10,
     "language": "es_ES",  # To force a specific language instead of the Django current language.
 }
+
+RECAPTCHA_PUBLIC_KEY = '6LdagyssAAAAABxQsq6x8VlyxzVZl_lFkJYiNxqU'
+RECAPTCHA_PRIVATE_KEY = '6LdagyssAAAAAPEu6fY6OBv6EKOS__jU4arIeG-_'

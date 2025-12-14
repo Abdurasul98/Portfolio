@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Download Resume</title>
+</head>
+<body>
+<h2>Download My Resume</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.captcha }}
+    <button type="submit">Download Resume</button>
+</form>
+
+</body>
+</html>
+
+

@@ -11,8 +11,6 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = 'email'
 
 
-
-
 class AboutMe(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     about_me = HTMLField(null=True, blank=True, help_text='Write something about yourself')
@@ -23,7 +21,6 @@ class AboutMe(models.Model):
 
     def __str__(self):
         return self.my_name
-
 
 class Education(models.Model):
     about_me = models.ForeignKey(AboutMe, on_delete=models.CASCADE)
@@ -47,14 +44,11 @@ class Experience(models.Model):
     def __str__(self):
         return f"{self.position} - {self.company} ({self.start_year} - {self.end_year})"
 
-
 class Skills(models.Model):
     name = models.CharField(max_length = 100, unique = True, help_text='Enter your skills')
 
     def __str__(self):
         return self.name
-
-
 
 class Project(models.Model):
     title = models.CharField(max_length = 100, help_text='Enter your project title')
@@ -86,14 +80,12 @@ class Project(models.Model):
     def __str__(self):
         return f"{self.title} {str(self.year)}"
 
-
 class ProjectImage(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE,related_name='images')
     image = models.ImageField(upload_to = 'project/image', null=True, blank=True,help_text='upload your project image')
 
     def __str__(self):
         return f'Image for {self.project.title}'
-
 
 class YoutubeVideo(models.Model):
     title = models.CharField(max_length = 100, help_text='Enter your video title')
@@ -103,6 +95,14 @@ class YoutubeVideo(models.Model):
 
     def __str__(self):
         return self.title
+
+class Resume(models.Model):
+    file = models.FileField(upload_to='resume/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Resume {self.id}"
+
 
 
 

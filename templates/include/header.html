@@ -13,6 +13,8 @@
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'works' %}">Works</a></li>
                     <li><a href="{% url 'contact' %}">Contact</a></li>
+                    <li><a href="{% url 'resume_download' %}">Download Resume</a></li>
+
 
                     {% if user.is_authenticated %}
                     {% if user.is_superuser %}
