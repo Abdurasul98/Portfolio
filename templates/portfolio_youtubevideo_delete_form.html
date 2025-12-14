@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Youtube Video</title>
+</head>
+<body>
+
+<h1>Delete Youtube Video</h1>
+
+<p>Are you sure you want to delete this item?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete</button>
+</form>
+
+<a href="{% url 'portfolio_youtubevideo_list_form' %}">Back to Videos List</a><br>
+<a href="{% url 'admin_index' %}">Back to Admin Menu</a><br>
+<a href="{% url 'logout' %}">Logout</a>
+
+</body>
+</html>

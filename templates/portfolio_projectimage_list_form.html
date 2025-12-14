@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Images List</title>
+</head>
+<body>
+
+<h1>Project Images</h1>
+
+<ul>
+    {% for image in images %}
+        <li>
+            {{ image }}
+            <a href="{% url 'portfolio_projectimage_update_form' image.pk %}">Edit</a>
+            <a href="{% url 'portfolio_projectimage_delete_form' image.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No images yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'portfolio_projectimage_create_form' %}">Create Image</a><br>
+<a href="{% url 'admin_index' %}">Back to Admin Menu</a><br>
+<a href="{% url 'logout' %}">Logout</a>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><title>Create About Me</title></head>
+<body>
+<h1>Create About Me</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+
+<a href="{% url 'portfolio_aboutme_list_form' %}">Back to List</a><br>
+<br>
+<a href="{% url 'admin_index' %}">Back to Admin</a><br>
+<br>
+<a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>

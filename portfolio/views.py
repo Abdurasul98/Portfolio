@@ -3,10 +3,11 @@ from django.contrib import messages
 from django.conf import settings
 from django.http import Http404
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import *
 from django.views import View
 from portfolio.models import *
-
+from portfolio.forms import *
+from django.urls import reverse_lazy
 
 def index(request):
     return render(request, 'index.html')
@@ -118,3 +119,191 @@ class ContactView(View):
 
 
 
+
+
+class AboutMeListView(ListView):
+    model = AboutMe
+    template_name = 'portfolio_aboutme_list_form.html'
+    context_object_name = 'aboutmes'
+
+
+class AboutMeCreateView(CreateView):
+    model = AboutMe
+    form_class = AboutMeForm
+    template_name = 'portfolio_aboutme_create_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class AboutMeUpdateView(UpdateView):
+    model = AboutMe
+    form_class = AboutMeForm
+    template_name = 'portfolio_aboutme_update_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class AboutMeDeleteView(DeleteView):
+    model = AboutMe
+    template_name = 'portfolio_aboutme_delete_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+
+class EducationListView(ListView):
+    model = Education
+    template_name = 'portfolio_education_list_form.html'
+    context_object_name = 'educations'
+
+
+class EducationCreateView(CreateView):
+    model = Education
+    form_class = EducationForm
+    template_name = 'portfolio_education_create_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class EducationUpdateView(UpdateView):
+    model = Education
+    form_class = EducationForm
+    template_name = 'portfolio_education_update_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class EducationDeleteView(DeleteView):
+    model = Education
+    template_name = 'portfolio_education_delete_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+
+class ExperienceListView(ListView):
+    model = Experience
+    template_name = 'portfolio_experience_list_form.html'
+    context_object_name = 'experiences'
+
+
+class ExperienceCreateView(CreateView):
+    model = Experience
+    form_class = ExperienceForm
+    template_name = 'portfolio_experience_create_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class ExperienceUpdateView(UpdateView):
+    model = Education
+    form_class = ExperienceForm
+    template_name = 'portfolio_experience_update_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class ExperienceDeleteView(DeleteView):
+    model = Experience
+    template_name = 'portfolio_experience_delete_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+
+class SkillsListView(ListView):
+    model = Skills
+    template_name = 'portfolio_skills_list_form.html'
+    context_object_name = 'skills'
+
+
+class SkillsCreateView(CreateView):
+    model = Skills
+    form_class = SkillsForm
+    template_name = 'portfolio_skills_create_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class SkillsUpdateView(UpdateView):
+    model = Skills
+    form_class = SkillsForm
+    template_name = 'portfolio_skills_update_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class SkillsDeleteView(DeleteView):
+    model = Skills
+    template_name = 'portfolio_skills_delete_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+
+class ProjectListView(ListView):
+    model = Project
+    template_name = 'portfolio_project_list_form.html'
+    context_object_name = 'projects'
+
+
+class ProjectCreateView(CreateView):
+    model = Project
+    form_class = ProjectForm
+    template_name = 'portfolio_project_create_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class ProjectUpdateView(UpdateView):
+    model = Project
+    form_class = ProjectForm
+    template_name = 'portfolio_project_update_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class ProjectDeleteView(DeleteView):
+    model = Project
+    template_name = 'portfolio_project_delete_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+
+class ProjectImageListView(ListView):
+    model = ProjectImage
+    template_name = 'portfolio_projectimage_list_form.html'
+    context_object_name = 'images'
+
+
+class ProjectImageCreateView(CreateView):
+    model = ProjectImage
+    form_class = ProjectImageForm
+    template_name = 'portfolio_projectimage_create_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class ProjectImageUpdateView(UpdateView):
+    model = ProjectImage
+    form_class = ProjectImageForm
+    template_name = 'portfolio_projectimage_update_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class ProjectImageDeleteView(DeleteView):
+    model = ProjectImage
+    template_name = 'portfolio_projectimage_delete_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+
+class YoutubeVideoListView(ListView):
+    model = YoutubeVideo
+    template_name = 'portfolio_youtubevideo_list_form.html'
+    context_object_name = 'videos'
+
+
+class YoutubeVideoCreateView(CreateView):
+    model = YoutubeVideo
+    form_class = YoutubeVideoForm
+    template_name = 'portfolio_youtubevideo_create_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class YoutubeVideoUpdateView(UpdateView):
+    model = YoutubeVideo
+    form_class = YoutubeVideoForm
+    template_name = 'portfolio_youtubevideo_update_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class YoutubeVideoDeleteView(DeleteView):
+    model = YoutubeVideo
+    template_name = 'portfolio_youtubevideo_delete_form.html'
+    success_url = reverse_lazy('admin_index')

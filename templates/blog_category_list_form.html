@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories List</title>
+</head>
+<body>
+<h1>All Categories</h1>
+
+<ul>
+    {% for category in categories %}
+        <li>
+            {{ category.name }}
+            <!-- Update va Delete faqat list sahifasida -->
+            <a href="{% url 'blog_category_update_form' category.pk %}">Edit</a>
+            <a href="{% url 'blog_category_delete_form' category.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No categories yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'blog_category_create_form' %}">Create New Category</a>
+<br>
+<a href="{% url 'admin_index' %}">Back to Admin Menu</a>
+<br>
+<a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>

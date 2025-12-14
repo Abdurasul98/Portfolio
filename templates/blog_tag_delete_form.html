@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Tag</title>
+</head>
+<body>
+<h1>Delete Tag</h1>
+
+<p>Are you sure you want to delete "{{ object.name }}"?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete</button>
+</form>
+
+<a href="{% url 'blog_tag_list_form' %}">Back to Tags List</a>
+<br>
+<a href="{% url 'admin_index' %}">Back to Admin Menu</a>
+<br>
+<a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>

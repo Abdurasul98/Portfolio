@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tags List</title>
+</head>
+<body>
+<h1>All Tags</h1>
+
+<ul>
+    {% for tag in tags %}
+        <li>
+            {{ tag.name }}
+            <a href="{% url 'blog_tag_update_form' tag.pk %}">Edit</a>
+            <a href="{% url 'blog_tag_delete_form' tag.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No tags yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'blog_tag_create_form' %}">Create New Tag</a>
+<br>
+<a href="{% url 'admin_index' %}">Back to Admin Menu</a>
+<br>
+<a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>

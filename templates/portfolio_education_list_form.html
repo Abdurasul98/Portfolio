@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Education List</title>
+</head>
+<body>
+
+<h1>Education</h1>
+
+<ul>
+    {% for education in educations %}
+        <li>
+            {{ education }}
+            <a href="{% url 'portfolio_education_update_form' education.pk %}">Edit</a>
+            <a href="{% url 'portfolio_education_delete_form' education.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No education yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'portfolio_education_create_form' %}">Create Education</a><br>
+<a href="{% url 'admin_index' %}">Back to Admin Menu</a><br>
+<a href="{% url 'logout' %}">Logout</a>
+
+</body>
+</html>

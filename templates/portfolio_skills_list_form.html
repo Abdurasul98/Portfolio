@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Skills List</title>
+</head>
+<body>
+
+<h1>Skills</h1>
+
+<ul>
+    {% for skill in skills %}
+        <li>
+            {{ skill }}
+            <a href="{% url 'portfolio_skills_update_form' skill.pk %}">Edit</a>
+            <a href="{% url 'portfolio_skills_delete_form' skill.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No skills yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'portfolio_skills_create_form' %}">Create Skill</a><br>
+<a href="{% url 'admin_index' %}">Back to Admin Menu</a><br>
+<a href="{% url 'logout' %}">Logout</a>
+
+</body>
+</html>

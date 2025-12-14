@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Youtube Video</title>
+</head>
+<body>
+
+<h1>Update Youtube Video</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+</form>
+
+<a href="{% url 'portfolio_youtubevideo_list_form' %}">Back to Videos List</a><br>
+<a href="{% url 'admin_index' %}">Back to Admin Menu</a><br>
+<a href="{% url 'logout' %}">Logout</a>
+
+</body>
+</html>

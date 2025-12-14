@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update About Me</title>
+</head>
+<body>
+
+<h1>Update About Me</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+</form>
+
+<a href="{% url 'portfolio_aboutme_list_form' %}">Back to About Me List</a>
+<br>
+<a href="{% url 'admin_index' %}">Back to Admin Menu</a>
+<br>
+<a href="{% url 'logout' %}">Logout</a>
+
+</body>
+</html>

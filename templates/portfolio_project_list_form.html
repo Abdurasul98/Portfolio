@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Projects List</title>
+</head>
+<body>
+
+<h1>Projects</h1>
+
+<ul>
+    {% for project in projects %}
+        <li>
+            {{ project }}
+            <a href="{% url 'portfolio_project_update_form' project.pk %}">Edit</a>
+            <a href="{% url 'portfolio_project_delete_form' project.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No projects yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'portfolio_project_create_form' %}">Create Project</a><br>
+<a href="{% url 'admin_index' %}">Back to Admin Menu</a><br>
+<a href="{% url 'logout' %}">Logout</a>
+
+</body>
+</html>

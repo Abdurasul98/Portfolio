@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Experience List</title>
+</head>
+<body>
+
+<h1>Experience</h1>
+
+<ul>
+    {% for experience in experiences %}
+        <li>
+            {{ experience }}
+            <a href="{% url 'portfolio_experience_update_form' experience.pk %}">Edit</a>
+            <a href="{% url 'portfolio_experience_delete_form' experience.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No experience yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'portfolio_experience_create_form' %}">Create Experience</a><br>
+<a href="{% url 'admin_index' %}">Back to Admin Menu</a><br>
+<a href="{% url 'logout' %}">Logout</a>
+
+</body>
+</html>

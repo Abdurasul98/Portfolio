@@ -5,8 +5,76 @@
     <title>Admin</title>
 </head>
 <body>
-<p>bu admin sahifasi</p>
-<p>oxiri kirdi</p>
+<p>Bu admin sahifasi</p>
+
+<nav class="navbar">
+    <ul class="menu">
+
+        <li><a href="{% url 'admin_index' %}">Menu</a></li>
+
+        <br><hr>
+
+        <!-- BLOG -->
+        <strong>Blog</strong><br><br>
+
+        <li><a href="{% url 'blog_category_list_form' %}">Categories List</a></li>
+        <li><a href="{% url 'blog_category_create_form' %}">Create Category</a></li>
+
+        <br>
+
+        <li><a href="{% url 'blog_tag_list_form' %}">Tags List</a></li>
+        <li><a href="{% url 'blog_tag_create_form' %}">Create Tag</a></li>
+
+        <br>
+
+        <li><a href="{% url 'blog_blog_list_form' %}">Blogs List</a></li>
+        <li><a href="{% url 'blog_blog_create_form' %}">Create Blog</a></li>
+
+        <br>
+
+        <li><a href="{% url 'blog_comment_list_form' %}">Comments List</a></li>
+        <li><a href="{% url 'blog_comment_create_form' %}">Create Comment</a></li>
+
+        <br><hr>
+
+        <!-- PORTFOLIO -->
+        <strong>Portfolio</strong><br><br>
+
+        <li><a href="{% url 'portfolio_aboutme_list_form' %}">About Me List</a></li>
+        <li><a href="{% url 'portfolio_aboutme_create_form' %}">Create About Me</a></li>
+
+        <br>
+
+        <li><a href="{% url 'portfolio_education_list_form' %}">Education List</a></li>
+        <li><a href="{% url 'portfolio_education_create_form' %}">Create Education</a></li>
+
+        <br>
+
+        <li><a href="{% url 'portfolio_experience_list_form' %}">Experience List</a></li>
+        <li><a href="{% url 'portfolio_experience_create_form' %}">Create Experience</a></li>
+
+        <br>
+
+        <li><a href="{% url 'portfolio_skills_list_form' %}">Skills List</a></li>
+        <li><a href="{% url 'portfolio_skills_create_form' %}">Create Skill</a></li>
+
+        <br>
+
+        <li><a href="{% url 'portfolio_project_list_form' %}">Projects List</a></li>
+        <li><a href="{% url 'portfolio_project_create_form' %}">Create Project</a></li>
+
+        <br>
+
+        <li><a href="{% url 'portfolio_projectimage_list_form' %}">Project Images List</a></li>
+        <li><a href="{% url 'portfolio_projectimage_create_form' %}">Create Project Image</a></li>
+
+        <br>
+
+        <li><a href="{% url 'portfolio_youtubevideo_list_form' %}">Youtube Videos List</a></li>
+        <li><a href="{% url 'portfolio_youtubevideo_create_form' %}">Create Youtube Video</a></li>
+
+    </ul>
+</nav>
 
 <a href="{% url 'logout' %}">Logout</a>
 </body>

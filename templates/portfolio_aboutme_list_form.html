@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Me List</title>
+</head>
+<body>
+
+<h1>About Me</h1>
+
+<ul>
+    {% for aboutme in aboutmes %}
+        <li>
+            {{ aboutme }}
+            <a href="{% url 'portfolio_aboutme_update_form' aboutme.pk %}">Edit</a>
+            <a href="{% url 'portfolio_aboutme_delete_form' aboutme.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No data yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'portfolio_aboutme_create_form' %}">Create About Me</a>
+<br>
+<a href="{% url 'admin_index' %}">Back to Admin Menu</a>
+<br>
+<a href="{% url 'logout' %}">Logout</a>
+
+</body>
+</html>

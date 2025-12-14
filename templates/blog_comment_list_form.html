@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comments List</title>
+</head>
+<body>
+<h1>All Comments</h1>
+
+<ul>
+    {% for comment in comments %}
+        <li>
+            {{ comment.content }}
+            <a href="{% url 'blog_comment_update_form' comment.pk %}">Edit</a>
+            <a href="{% url 'blog_comment_delete_form' comment.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No comments yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'blog_comment_create_form' %}">Create New Comment</a>
+<br>
+<a href="{% url 'admin_index' %}">Back to Admin Menu</a>
+<br>
+<a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>

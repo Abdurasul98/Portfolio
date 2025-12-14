@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Youtube Videos List</title>
+</head>
+<body>
+
+<h1>Youtube Videos</h1>
+
+<ul>
+    {% for video in videos %}
+        <li>
+            {{ video }}
+            <a href="{% url 'portfolio_youtubevideo_update_form' video.pk %}">Edit</a>
+            <a href="{% url 'portfolio_youtubevideo_delete_form' video.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No videos yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'portfolio_youtubevideo_create_form' %}">Create Video</a><br>
+<a href="{% url 'admin_index' %}">Back to Admin Menu</a><br>
+<a href="{% url 'logout' %}">Logout</a>
+
+</body>
+</html>

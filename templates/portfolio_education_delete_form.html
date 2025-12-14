@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Delete</title>
+</head>
+<body>
+
+<h2>Are you sure?</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+</form>
+
+<br>
+<a href="{% url 'portfolio_aboutme_list_form' %}">Cancel</a>
+
+</body>
+</html>

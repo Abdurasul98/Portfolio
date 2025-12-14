@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from rest_framework.reverse import reverse_lazy
+from blog.forms import CategoryForm, TagForm, BlogForm, CommentForm
 from blog.models import Blog, Category,Tag,Comment
 import bleach
 from django.contrib.auth import authenticate, login, logout
@@ -77,6 +79,111 @@ class BlogDetailView(DetailView):
 
 
 
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'blog_category_list_form.html'
+    context_object_name = 'categories'
+
+
+class CategoryCreateView(CreateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'blog_category_create_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class CategoryUpdateView(UpdateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'blog_category_update_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class CategoryDeleteView(DeleteView):
+    model = Category
+    template_name = 'blog_category_delete_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+
+class TagListView(ListView):
+    model = Tag
+    template_name = 'blog_tag_list_form.html'
+    context_object_name = 'tags'
+
+
+class TagCreateView(CreateView):
+    model = Tag
+    form_class = TagForm
+    template_name = 'blog_tag_create_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class TagUpdateView(UpdateView):
+    model = Tag
+    form_class = TagForm
+    template_name = 'blog_tag_update_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class TagDeleteView(DeleteView):
+    model = Tag
+    template_name = 'blog_tag_delete_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+
+class BlogListView(ListView):
+    model = Blog
+    template_name = 'blog_blog_list_form.html'
+    context_object_name = 'blogs'
+
+
+class BlogCreateView(CreateView):
+    model = Blog
+    form_class = BlogForm
+    template_name = 'blog_blog_create_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class BlogUpdateView(UpdateView):
+    model = Blog
+    form_class = BlogForm
+    template_name = 'blog_blog_update_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class BlogDeleteView(DeleteView):
+    model = Blog
+    template_name = 'blog_blog_delete_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+
+class CommentListView(ListView):
+    model = Comment
+    template_name = 'blog_comment_list_form.html'
+    context_object_name = 'comments'
+
+
+class CommentCreateView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'blog_comment_create_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class CommentUpdateView(UpdateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'blog_comment_update_form.html'
+    success_url = reverse_lazy('admin_index')
+
+
+class CommentDeleteView(DeleteView):
+    model = Comment
+    template_name = 'blog_comment_delete_form.html'
+    success_url = reverse_lazy('admin_index')
 
 
 
@@ -86,7 +193,8 @@ class BlogDetailView(DetailView):
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 def admin_index_view(request):
-    return render(request, 'admin_index.html')
+    categories = Category.objects.all()
+    return render(request, 'admin_index.html',{'categories': categories})
 
 
 def logout_view(request):
