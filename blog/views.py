@@ -133,7 +133,7 @@ class TagDeleteView(DeleteView):
 
 
 
-class BlogListView(ListView):
+class BlogListsView(ListView):
     model = Blog
     template_name = 'blog_blog_list_form.html'
     context_object_name = 'blogs'

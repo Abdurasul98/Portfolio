@@ -59,13 +59,13 @@
                             <div class="blog-sidebar-widget-inner shadow-box">
                                 <h3>Recent Posts</h3>
 
-                                {% for post in recent_posts %}
-                                    <ul>
+                                <ul>
+                                    {% for post in recent_posts %}
                                         <li><a href="{% url 'blog_detail' slug=post.slug %}">{{ post.title }}</a></li>
-                                    </ul>
-                                {{ empty}}
-                                    <li>No recent post available</li>
-                                {% endfor %}
+                                    {% empty %}
+                                        <li>No recent post available</li>
+                                    {% endfor %}
+                                </ul>
 
                             </div>
                         </div>

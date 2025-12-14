@@ -1,8 +1,11 @@
+import textwrap
+
 import requests
 from django.contrib import messages
 from django.conf import settings
 from django.http import Http404, FileResponse, HttpResponse
 from django.shortcuts import render, redirect
+from django.utils.html import strip_tags
 from django.views.generic import *
 from django.views import View
 from reportlab.lib.pagesizes import A4
@@ -363,8 +366,12 @@ def generate_resume_pdf():
 
         p.setFont("Helvetica", 12)
         text = p.beginText(50, y)
-        for line in about.about_me.splitlines():
-            text.textLine(line)
+
+        if about.about_me:
+            clean_about_me = strip_tags(about.about_me)
+            lines = textwrap.wrap(clean_about_me, width=80)  # width – qator uzunligi (tahrirlash mumkin)
+            for line in lines:
+                text.textLine(line)
         p.drawText(text)
         y -= 80
 

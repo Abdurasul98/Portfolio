@@ -21,7 +21,7 @@ urlpatterns = [
     path('tag/<int:pk>/delete/', TagDeleteView.as_view(), name='blog_tag_delete_form'),
     path('tag/<int:pk>/update/', TagUpdateView.as_view(), name='blog_tag_update_form'),
 
-    path('blog/', BlogListView.as_view(), name='blog_blog_list_form'),
+    path('blog/', BlogListsView.as_view(), name='blog_blog_list_form'),
     path('blog/add/', BlogCreateView.as_view(), name='blog_blog_create_form'),
     path('blog/<int:pk>/delete/', BlogDeleteView.as_view(), name='blog_blog_delete_form'),
     path('blog/<int:pk>/update/', BlogUpdateView.as_view(), name='blog_blog_update_form'),

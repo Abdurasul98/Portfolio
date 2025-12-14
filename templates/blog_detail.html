@@ -105,9 +105,9 @@
 
                                 <ul>
                                     {% for post in recent_posts %}
-                                    <li><a href="{% url 'blog_detail' slug=post.slug %}">{{ post.title }}</a></li>
+                                        <li><a href="{% url 'blog_detail' slug=post.slug %}">{{ post.title }}</a></li>
                                     {% empty %}
-                                    <li>No recent post available</li>
+                                        <li>No recent post available</li>
                                     {% endfor %}
                                 </ul>
 
@@ -123,7 +123,7 @@
                                     <li><a href="?category={{ category.slug }}">-{{ category.name }}</a></li>
                                 </ul>
                                 {% empty %}
-                                <li>No categories available</li>
+                                    <li>No categories available</li>
                                 {% endfor %}
 
                             </div>
@@ -135,9 +135,9 @@
 
                                 <ul>
                                     {% for tag in tegs %}
-                                    <li><a class="theme-btn" href="?tag={{ tag.slug }}">{{ tag.name }}</a></li>
+                                        <li><a class="theme-btn" href="?tag={{ tag.slug }}">{{ tag.name }}</a></li>
                                     {% empty %}
-                                    <li>No tags available</li>
+                                        <li>No tags available</li>
                                     {% endfor %}
                                 </ul>
 

@@ -12,7 +12,7 @@
                 <div class="d-flex about-me-wrap align-items-start gap-24">
                     <div data-aos="zoom-in">
                         <div class="about-image-box shadow-box">
-                            <img src="{% static '/images/bg1.png' %}" alt="BG" class="bg-img">
+                            <img src="{% static 'images/bg1.png' %}" alt="BG" class="bg-img">
                             <div class="image-inner">
                                 {% if about_me.image %}
                                     <img src="{{ about_me.image.url }}" alt="About Me">
@@ -22,9 +22,9 @@
                     </div>
 
                     <div class="about-details" data-aos="zoom-in">
-                        <h1 class="section-heading" data-aos="fade-up"><img src="{% static '/images/star-2.png' %}" alt="Star"> Self-summary <img src="{% static '/images/star-2.png' %}" alt="Star"></h1>
+                        <h1 class="section-heading" data-aos="fade-up"><img src="{% static 'images/star-2.png' %}" alt="Star"> Self-summary <img src="{% static 'images/star-2.png' %}" alt="Star"></h1>
                         <div class="about-details-inner shadow-box">
-                            <img src="{% static '/images/icon2.png' %}" alt="Star">
+                            <img src="{% static 'images/icon2.png' %}" alt="Star">
                             <h1>{{ about_me.my_name }}</h1>
                             <p>{{ about_me.about_me | safe }}</p>
                         </div>

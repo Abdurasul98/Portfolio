@@ -5,16 +5,14 @@
     <title>Admin</title>
 </head>
 <body>
-<p>Bu admin sahifasi</p>
-
 <nav class="navbar">
     <ul class="menu">
 
         <li><a href="{% url 'admin_index' %}">Menu</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
 
         <br><hr>
 
-        <!-- BLOG -->
         <strong>Blog</strong><br><br>
 
         <li><a href="{% url 'blog_category_list_form' %}">Categories List</a></li>
@@ -37,7 +35,6 @@
 
         <br><hr>
 
-        <!-- PORTFOLIO -->
         <strong>Portfolio</strong><br><br>
 
         <li><a href="{% url 'portfolio_aboutme_list_form' %}">About Me List</a></li>
@@ -75,7 +72,5 @@
 
     </ul>
 </nav>
-
-<a href="{% url 'logout' %}">Logout</a>
 </body>
 </html>
