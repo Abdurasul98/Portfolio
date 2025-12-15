@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.text import slugify
 from tinymce.models import HTMLField
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 
 
 class Category(models.Model):
@@ -78,3 +80,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment by {self.name} on {self.blog.title}"
+
+@receiver(post_save, sender=Comment)
+@receiver(post_delete, sender=Comment)
+def update_blog_comments_count(sender, instance, **kwargs):
+    blog = instance.blog
+    blog.comments_count = blog.comments.count()
+    blog.save()
