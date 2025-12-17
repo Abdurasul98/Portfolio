@@ -145,5 +145,5 @@ TINYMCE_DEFAULT_CONFIG = {
     "language": "es_ES",  # To force a specific language instead of the Django current language.
 }
 
-RECAPTCHA_SITE_KEY = '6LfLpyssAAAAAN4-6aDQ3wws1jajGl9iD7kAFUQH'
-RECAPTCHA_SECRET_KEY = '6LfLpyssAAAAAB4oKNxPQTC-MelQpxgPyrbmTAzb'
+RECAPTCHA_SITE_KEY = os.getenv('RECAPTCHA_SITE_KEY')
+RECAPTCHA_SECRET_KEY = os.getenv('RECAPTCHA_SECRET_KEY')
