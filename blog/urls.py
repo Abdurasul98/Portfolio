@@ -3,13 +3,10 @@ from blog.views import *
 
 urlpatterns = [
     path('blog/',BlogListView.as_view(),name='blog_list'),
-    path('blog/<slug:slug>/',BlogDetailView.as_view(),name='blog_detail'),
-
-
+    
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('admin_index/', admin_index_view, name='admin_index'),
-
 
     path('category/',CategoryListView.as_view(),name='blog_category_list_form'),
     path('category/add/',CategoryCreateView.as_view(),name='blog_category_create_form'),
@@ -25,6 +22,9 @@ urlpatterns = [
     path('blog/add/', BlogCreateView.as_view(), name='blog_blog_create_form'),
     path('blog/<int:pk>/delete/', BlogDeleteView.as_view(), name='blog_blog_delete_form'),
     path('blog/<int:pk>/update/', BlogUpdateView.as_view(), name='blog_blog_update_form'),
+
+    
+    path('blog/<slug:slug>/',BlogDetailView.as_view(),name='blog_detail'),
 
     path('comment/', CommentListView.as_view(), name='blog_comment_list_form'),
     path('comment/add/', CommentCreateView.as_view(), name='blog_comment_create_form'),
