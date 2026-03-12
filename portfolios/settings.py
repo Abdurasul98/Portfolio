@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'portfolio',
     'tinymce',
     'blog',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -72,11 +73,11 @@ WSGI_APPLICATION = 'portfolios.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('NAME'),
-        'USER': os.getenv('USER'),
-        'PASSWORD': os.getenv('PASSWORD'),
-        'HOST': os.getenv('HOST'),
-        'PORT': os.getenv('PORT'),
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
@@ -145,5 +146,7 @@ TINYMCE_DEFAULT_CONFIG = {
     "language": "es_ES",  # To force a specific language instead of the Django current language.
 }
 
-RECAPTCHA_SITE_KEY = os.getenv('RECAPTCHA_SITE_KEY')
-RECAPTCHA_SECRET_KEY = os.getenv('RECAPTCHA_SECRET_KEY')
+RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
+RECAPTCHA_SITE_KEY = RECAPTCHA_PUBLIC_KEY
+RECAPTCHA_SECRET_KEY = RECAPTCHA_PRIVATE_KEY

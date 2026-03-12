@@ -1,5 +1,5 @@
 import textwrap
-
+import os
 import requests
 from django.contrib import messages
 from django.conf import settings
@@ -341,11 +341,12 @@ def resume_download_view(request):
                 'error': 'Captcha tasdiqlanmadi',
                 'RECAPTCHA_SITE_KEY': settings.RECAPTCHA_SITE_KEY
             })
+        # Yangilangan resume faylini pathini sozlash
+        resume_path = os.path.join(settings.MEDIA_ROOT, 'resume', 'Ergashev Abdurasul.pdf')
 
-        pdf_buffer = generate_resume_pdf()
-        response = HttpResponse(pdf_buffer, content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="Resume.pdf"'
-        return response
+        if not os.path.exists(resume_path):
+            raise Http404("Resume fayli topilmadi.")
+        return FileResponse(open(resume_path, 'rb'), as_attachment=True, filename='Resume.pdf')
 
     return render(request, 'portfolio_resume_download.html', {
         'RECAPTCHA_SITE_KEY': settings.RECAPTCHA_SITE_KEY

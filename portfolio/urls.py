@@ -11,7 +11,7 @@ urlpatterns = [
     path('resume/download/', resume_download_view, name='resume_download'),
 
 
-# AboutMe
+    # AboutMe
     path('aboutme/', AboutMeListView.as_view(), name='portfolio_aboutme_list_form'),
     path('aboutme/add/', AboutMeCreateView.as_view(), name='portfolio_aboutme_create_form'),
     path('aboutme/<int:pk>/update/', AboutMeUpdateView.as_view(), name='portfolio_aboutme_update_form'),

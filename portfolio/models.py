@@ -10,7 +10,6 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = ['username']
     USERNAME_FIELD = 'email'
 
-
 class AboutMe(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     about_me = HTMLField(null=True, blank=True, help_text='Write something about yourself')
@@ -102,11 +101,3 @@ class Resume(models.Model):
 
     def __str__(self):
         return f"Resume {self.id}"
-
-
-
-
-
-
-
-
